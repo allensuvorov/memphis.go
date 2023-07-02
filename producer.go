@@ -352,6 +352,19 @@ func (opts *ProduceOpts) produce(p *Producer) error {
 	opts.MsgHeaders.MsgHeaders["$memphis_connectionId"] = []string{p.conn.ConnId}
 	opts.MsgHeaders.MsgHeaders["$memphis_producedBy"] = []string{p.Name}
 
+	// TODO SchemaAutoRegistry
+	// Get message
+	// scan message to return schema
+	// save schema
+	// enforce schema
+	// if flag ScanMsgSchema is true then
+
+	// if opts.ScanMsgSchema {
+	// 	err := scanSchema(opt.Message)
+	// }
+
+	////
+
 	data, err := p.validateMsg(opts.Message, opts.MsgHeaders.MsgHeaders)
 	if err != nil {
 		return memphisError(err)
