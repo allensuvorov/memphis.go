@@ -353,15 +353,15 @@ func (opts *ProduceOpts) produce(p *Producer) error {
 	opts.MsgHeaders.MsgHeaders["$memphis_producedBy"] = []string{p.Name}
 
 	// TODO SchemaAutoRegistry
-	// Get message
-	// scan message to return schema
-	// save schema
-	// enforce schema
-	// if flag ScanMsgSchema is true then
+	// 1. read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
+	// 2. scan message to return schema
+	// 3. save schema,
+	// func (c *Conn) CreateSchema(name, schemaType, path string) error {
+	// 4. enforce schema - attache schema to station
 
-	// if opts.ScanMsgSchema {
-	// 	err := scanSchema(opt.Message)
-	// }
+	if opts.ScanMsgSchema {
+		err := scanSchema(opt.Message)
+	}
 
 	////
 
