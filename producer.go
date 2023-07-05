@@ -356,8 +356,9 @@ func (opts *ProduceOpts) produce(p *Producer) error {
 	// 1. read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
 	// 2. scan message to return schema
 	// 3. save schema,
-	// func (c *Conn) CreateSchema(name, schemaType, path string) error {
+	func (c *Conn) CreateSchema(name, schemaType, path string) error {}
 	// 4. enforce schema - attache schema to station
+	func (c *Conn) EnforceSchema(name string, stationName string) error {}	
 
 	if opts.ScanMsgSchema {
 		err := scanSchema(opt.Message)
