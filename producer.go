@@ -355,6 +355,7 @@ func (opts *ProduceOpts) produce(p *Producer) error {
 	// TODO SchemaAutoRegistry
 	// 1. read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
 	// 2. scan message to return schema
+	err := ScanMsgChema(opts.Message)
 	// 3. save schema,
 	func (c *Conn) CreateSchema(name, schemaType, path string) error {}
 	// 4. enforce schema - attache schema to station
@@ -363,7 +364,7 @@ func (opts *ProduceOpts) produce(p *Producer) error {
 	if opts.ScanMsgSchema {
 		err := scanSchema(opt.Message)
 	}
-
+	func ScanMsgChema(msg any) {}
 	////
 
 	data, err := p.validateMsg(opts.Message, opts.MsgHeaders.MsgHeaders)
