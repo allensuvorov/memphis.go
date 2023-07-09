@@ -155,3 +155,44 @@ func validateSchemaType(schemaType string) error {
 		return invalidTypeErr
 	}
 }
+
+// TODO: autoRegSchema()
+func autoRegSchema() {
+	// 1. TODO: read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
+	
+	// 2. TODO: scan message to return schema
+	if opts.scanMsgSchema {
+		err := scanMsgSchema(opt.Message)
+	}
+	// 3. Save new schema
+	func (c *Conn) CreateSchema(name, schemaType, path string) error {}
+	// 4. Enforce schema - attache schema to station
+	func (c *Conn) EnforceSchema(name string, stationName string) error {}	
+}
+
+// TODO: func scanMsgChema(msg any)
+func scanMsgChema(msg any) {
+// TODO: getMsgFormat() - validate msg type to check if msg type is supported or not and to get the type
+// TODO: readSchema() - once type is known, read schema of that specific type
+}
+
+// TODO: extractSchema takes an object and generates the schema
+func extractSchema(message, schemaType string) (schemaContent, schemaType string) {
+	var schemaContent string
+	switch schemaType {
+	case "protobuf":
+		// Protocol Buffer Descriptors
+		// https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect
+	case "json":
+		// genJsonSchema generates json schema in the format described on json-schema.org
+		// https://github.com/xeipuuv/gojsonschema
+		// https://github.com/invopop/jsonschema
+		// https://git.sr.ht/~emersion/go-jsonschema
+		// https://github.com/mcuadros/go-jsonschema-generator
+		// https://github.com/fybrik/json-schema-generator
+	case "graphql":
+		// https://gqlgen.com/feature-comparison/
+	default:
+		return schemaContent, schemaType
+	}	
+}

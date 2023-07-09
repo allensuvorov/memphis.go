@@ -347,29 +347,12 @@ func (hdr *Headers) Add(key, value string) error {
 	return nil
 }
 
-/* TODO: func ScanMsgChema(msg any) {
-// TODO: getMsgFormat() - validate msg type to check if msg type is supported or not and to get the type
-// TODO: readSchema() - once type is known, read schema of that specific type
-} ...
-*/
 // ProducerOpts.produce - produces a message into a station using a configuration struct.
 func (opts *ProduceOpts) produce(p *Producer) error {
 	opts.MsgHeaders.MsgHeaders["$memphis_connectionId"] = []string{p.conn.ConnId}
 	opts.MsgHeaders.MsgHeaders["$memphis_producedBy"] = []string{p.Name}
 
-	// TODO SchemaAutoRegistry
-	// 1. TODO: read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
-	// 2. TODO: scan message to return schema
-	// draft: err := ScanMsgChema(opts.Message)
-	// 3. Save new schema
-	func (c *Conn) CreateSchema(name, schemaType, path string) error {}
-	// 4. Enforce schema - attache schema to station
-	func (c *Conn) EnforceSchema(name string, stationName string) error {}	
-
-	if opts.ScanMsgSchema {
-		err := scanSchema(opt.Message)
-	}
-	////
+	// TODO autoRegSchema()
 
 	data, err := p.validateMsg(opts.Message, opts.MsgHeaders.MsgHeaders)
 	if err != nil {
@@ -454,7 +437,7 @@ func (p *Producer) sendMsgToDls(msg any, headers map[string][]string, err error)
 	}
 }
 
-//validateMsg validates message againts supported types and schema (if schema is attached)
+// validateMsg validates message againts supported types and schema (if schema is attached)
 func (p *Producer) validateMsg(msg any, headers map[string][]string) ([]byte, error) {
 	sd, err := p.getSchemaDetails()
 	if err != nil {
