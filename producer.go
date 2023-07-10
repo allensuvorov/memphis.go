@@ -157,6 +157,8 @@ func (c *Conn) CreateProducer(stationName, name string, opts ...ProducerOpt) (*P
 		}
 	}
 
+	// TODO check with station if schema auto reg is needed
+
 	p := Producer{
 		Name:        name,
 		stationName: stationName,
