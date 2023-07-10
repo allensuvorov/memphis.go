@@ -194,5 +194,9 @@ func extractSchema(message, schemaType string) (schemaContent, schemaType string
 		// https://gqlgen.com/feature-comparison/
 	default:
 		return schemaContent, schemaType
-	}	
+	}
+	//these are on the broker schema handler:	
+	"github.com/graph-gophers/graphql-go"
+	"github.com/jhump/protoreflect/desc/protoparse"
+	"github.com/santhosh-tekuri/jsonschema/v5"
 }

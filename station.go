@@ -39,14 +39,15 @@ import (
 
 // Station - memphis station object.
 type Station struct {
-	Name                 string
-	RetentionType        RetentionType
-	RetentionValue       int
-	StorageType          StorageType
-	Replicas             int
-	IdempotencyWindow    time.Duration
-	conn                 *Conn
-	SchemaName           string
+	Name              string
+	RetentionType     RetentionType
+	RetentionValue    int
+	StorageType       StorageType
+	Replicas          int
+	IdempotencyWindow time.Duration
+	conn              *Conn
+	SchemaName        string
+	// SchemaAutoRegistry   bool
 	DlsConfiguration     dlsConfiguration
 	TieredStorageEnabled bool
 }
