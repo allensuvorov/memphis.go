@@ -38,11 +38,11 @@ const (
 
 // Producer - memphis producer object.
 type Producer struct {
-	Name        string
-	stationName string
-	conn        *Conn
-	realName    string
-	// schemaAutoRegistry bool
+	Name                  string
+	stationName           string
+	conn                  *Conn
+	realName              string
+	schemaAutoRegRequired bool
 }
 
 type createProducerReq struct {
@@ -157,7 +157,7 @@ func (c *Conn) CreateProducer(stationName, name string, opts ...ProducerOpt) (*P
 		}
 	}
 
-	// TODO check with station if schema auto reg is needed
+	// TODO check with station if schema auto reg is required
 
 	p := Producer{
 		Name:        name,
@@ -355,7 +355,12 @@ func (opts *ProduceOpts) produce(p *Producer) error {
 	opts.MsgHeaders.MsgHeaders["$memphis_connectionId"] = []string{p.conn.ConnId}
 	opts.MsgHeaders.MsgHeaders["$memphis_producedBy"] = []string{p.Name}
 
-	// TODO AutoRegistry
+	if p.schemaAutoRegRequired {
+		err := autoRegSchema(opts.Message, p.stationName)
+		if err != nil {
+			return memphisError(err)
+		}
+	}
 
 	data, err := p.validateMsg(opts.Message, opts.MsgHeaders.MsgHeaders)
 	if err != nil {

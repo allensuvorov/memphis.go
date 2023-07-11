@@ -157,7 +157,7 @@ func validateSchemaType(schemaType string) error {
 }
 
 // TODO: autoRegSchema()
-func autoRegSchema() {
+func autoRegSchema(msg any, stationName string) error {
 	// 1. TODO: read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
 	
 	// 2. TODO: scan message to return schema
