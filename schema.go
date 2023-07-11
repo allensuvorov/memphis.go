@@ -158,23 +158,32 @@ func validateSchemaType(schemaType string) error {
 
 // autoRegSchema generates and enforces message schema out of the message
 func autoRegSchema(msg any, stationName string) error {
-	// 1. TODO: read flag ScanMsgChema. Where to store that flag?  if flag ScanMsgSchema is true then
-	
-	// 2. TODO: scan message to return schema
-	if opts.scanMsgSchema {
-		err := scanMsgSchema(opt.Message)
+	// 1. TODO: get msg format (json, graphQL, protobuf) and validate it is supported
+	format, err := getMsgFormat(msg)
+	if err != nil {
+		return memphisError(err)
 	}
+
+	// 2. TODO: generage message schema for the format
+	schemaContent, err := generateMsgSchema(opt.Message, format)
+	if err != nil {
+		return memphisError(err)
+	}
+	
 	// 3. Save new schema
 	func (c *Conn) CreateSchema(name, schemaType, path string) error {}
+	if err != nil {
+		return memphisError(err)
+	}
+
 	// 4. Enforce schema - attache schema to station
 	func (c *Conn) EnforceSchema(name string, stationName string) error {}	
+	if err != nil {
+		return memphisError(err)
+	}
 }
 
-// TODO: func scanMsgChema(msg any)
-func scanMsgChema(msg any) {
-// TODO: getMsgFormat() - validate msg type to check if msg type is supported or not and to get the type
-// TODO: readSchema() - once type is known, read schema of that specific type
-}
+
 
 // TODO: extractSchema takes an object and generates the schema
 func extractSchema(message, schemaType string) (schemaContent, schemaType string) {
