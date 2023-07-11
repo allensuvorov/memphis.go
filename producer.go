@@ -445,7 +445,7 @@ func (p *Producer) sendMsgToDls(msg any, headers map[string][]string, err error)
 	}
 }
 
-// validateMsg validates message againts supported types and schema (if schema is attached)
+// validateMsg validates message againts supported formats and schema (if schema is attached)
 func (p *Producer) validateMsg(msg any, headers map[string][]string) ([]byte, error) {
 	sd, err := p.getSchemaDetails()
 	if err != nil {

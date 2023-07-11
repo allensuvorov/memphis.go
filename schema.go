@@ -164,7 +164,7 @@ func autoRegSchema(msg any, stationName string) error {
 		return memphisError(err)
 	}
 
-	// 2. TODO: generage message schema for the format
+	// 2. TODO: generate message schema for the format
 	schemaContent, err := generateMsgSchema(opt.Message, format)
 	if err != nil {
 		return memphisError(err)
@@ -181,6 +181,12 @@ func autoRegSchema(msg any, stationName string) error {
 	if err != nil {
 		return memphisError(err)
 	}
+
+	// what if: user sets schemaAutoRegRequired == true on brocker station, 
+	// potentially creates producer with schemaAutoRegRequired == true
+	// and then before any message is sent, the user enforces another schema manually?
+	// - solution #1: any schema enforcement should set schemaAutoRegRequired flag OFF on 
+	// broker and on producer. 
 }
 
 
