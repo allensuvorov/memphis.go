@@ -215,3 +215,41 @@ func extractSchema(message, schemaType string) (schemaContent, schemaType string
 	"github.com/jhump/protoreflect/desc/protoparse"
 	"github.com/santhosh-tekuri/jsonschema/v5"
 }
+
+func getMsgFormat(msg any) (string, error) {
+	// json - text or []byte
+	// protobuf - usually []byte with schema (text) exchagned in advance
+	// graphql - text
+	// notes: []byte can store 
+	// check data type: []byte or string
+	// check 
+	switch msg.(type) {
+		case []byte:
+			return msg.([]byte), nil
+		case string:
+			msgBytes, err := json.Marshal(msg)
+			if err != nil {
+				return nil, memphisError(err)
+			}
+			return msgBytes, nil
+		case map[string]interface{}:
+			return json.Marshal(msg)
+		case protoreflect.ProtoMessage:
+			msgBytes, err := proto.Marshal(msg.(protoreflect.ProtoMessage))
+			if err != nil {
+				return nil, memphisError(err)
+			}
+			return msgBytes, nil
+		default:
+			msgType := reflect.TypeOf(msg).Kind()
+			if msgType == reflect.Struct {
+				msgBytes, err := json.Marshal(msg)
+				if err != nil {
+					return nil, memphisError(err)
+				}
+				return msgBytes, nil
+			} else {
+				return nil, memphisError(errors.New("unsupported message type"))
+			}
+		}
+}
