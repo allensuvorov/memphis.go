@@ -257,6 +257,8 @@ func getMsgFormat(msg any) (string, error) {
 /*
 * Kafka: Confluent Schema Registry - Auto Schema Registration
 https://docs.confluent.io/platform/current/schema-registry/schema_registry_onprem_tutorial.html#auto-schema-registration
+Looks like this is doing it:
+https://github.com/confluentinc/schema-registry.git
 
 * AWS: Glue
 https://docs.aws.amazon.com/glue/latest/dg/schema-registry-works.html
