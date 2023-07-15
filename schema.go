@@ -263,3 +263,8 @@ https://github.com/confluentinc/schema-registry.git
 * AWS: Glue
 https://docs.aws.amazon.com/glue/latest/dg/schema-registry-works.html
 */
+
+/*
+Deserialization. Inferring message format: json protobuf graphql avro
+https://medium.com/adevinta-tech-blog/inferring-kafka-topic-format-during-json-deserialization-6d484588c8fd
+*/
