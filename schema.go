@@ -191,25 +191,29 @@ func autoRegSchema(msg any, stationName string) error {
 
 
 
-// TODO: extractSchema takes an object and generates the schema
-func extractSchema(message, schemaType string) (schemaContent, schemaType string) {
+// TODO: generateMsgSchema takes msg, format and generates the schema
+func generateMsgSchema(msg, msgFmt string) (schemaContent string, error) {
 	var schemaContent string
-	switch schemaType {
-	case "protobuf":
-		// Protocol Buffer Descriptors
-		// https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect
+	switch msgFmt {
 	case "json":
 		// genJsonSchema generates json schema in the format described on json-schema.org
+		schemaContent, err = genJsonSchema(msg)
+		if err != nil {
+			return "", memphisError(err)
+		}	
+		return schemaContent, schemaType
 		// https://github.com/xeipuuv/gojsonschema
 		// https://github.com/invopop/jsonschema
 		// https://git.sr.ht/~emersion/go-jsonschema
 		// https://github.com/mcuadros/go-jsonschema-generator
 		// https://github.com/fybrik/json-schema-generator
+	case "protobuf":
+		// Protocol Buffer Descriptors
+		// https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect
 	case "graphql":
 		// https://gqlgen.com/feature-comparison/
 	default:
-		return schemaContent, schemaType
-	}
+		return schemaContent, nil
 	//these are on the broker schema handler:	
 	"github.com/graph-gophers/graphql-go"
 	"github.com/jhump/protoreflect/desc/protoparse"
