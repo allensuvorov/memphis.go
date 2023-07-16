@@ -197,16 +197,11 @@ func generateMsgSchema(msg, msgFmt string) (schemaContent string, error) {
 	switch msgFmt {
 	case "json":
 		// genJsonSchema generates json schema in the format described on json-schema.org
-		schemaContent, err = genJsonSchema(msg)
+		schemaContent, err = generateJsonSchema(msg)
 		if err != nil {
 			return "", memphisError(err)
 		}	
 		return schemaContent, schemaType
-		// https://github.com/xeipuuv/gojsonschema
-		// https://github.com/invopop/jsonschema
-		// https://git.sr.ht/~emersion/go-jsonschema
-		// https://github.com/mcuadros/go-jsonschema-generator
-		// https://github.com/fybrik/json-schema-generator
 	case "protobuf":
 		// Protocol Buffer Descriptors
 		// https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect
@@ -218,6 +213,32 @@ func generateMsgSchema(msg, msgFmt string) (schemaContent string, error) {
 	"github.com/graph-gophers/graphql-go"
 	"github.com/jhump/protoreflect/desc/protoparse"
 	"github.com/santhosh-tekuri/jsonschema/v5"
+}
+
+func generateJsonSchema(msg any) (schemaContent string, error) {
+	// json value -> go type -> schema string
+	// value could be string, []byte, number, struct, map
+	
+	// solution a: 1 step
+		// https:marketplace.visualstudio.com/items?itemName=MadsKristensen.JSONSchemaGenerator2#:~:text=Generate%20JSON%20Schema,json%20.
+		// https:github.com/MadsKristensen/JSONSchemaGenerator - c#
+			
+	// solution b: 2 steps
+		// step 1 generates Go types from JSON
+			// https://github.com/ChimeraCoder/gojson - 2.6k stars
+			// https://github.com/tmc/json-to-struct - 29 stars
+		// step 2 generates schemas from Go types
+			// https://github.com/invopop/jsonschema - generates schemas from Go types
+			// https://github.com/mcuadros/go-jsonschema-generator - Basic json-schema generator based on Go types
+			// https://github.com/fybrik/json-schema-generator - Generate JSON schemas from Go structures
+			
+		
+	// not a fit:
+	// https://github.com/santhosh-tekuri/jsonschema/tree/v5.1.0 - from Memphis - takes JSON schema and return Go struct.
+	// https://quicktype.io - only web based or 
+	// https://mholt.github.io/json-to-go/ - javascript
+	// https://github.com/xeipuuv/gojsonschema - json validation using schema
+	// https://git.sr.ht/~emersion/go-jsonschema - ?
 }
 
 func getMsgFormat(msg any) (string, error) {
