@@ -254,6 +254,18 @@ func getMsgFormat(msg any) (string, error) {
 		}
 }
 
+
+// TODO inferring msg data format - later
+
+/*
+Plan: 
+1. Schema gen (Json, Protobuf, GraphQL)
+2. Save
+3. Enforce
+4. call
+5. infer format
+*/
+
 /*
 * Kafka: Confluent Schema Registry - Auto Schema Registration
 https://docs.confluent.io/platform/current/schema-registry/schema_registry_onprem_tutorial.html#auto-schema-registration
